@@ -8,8 +8,9 @@
     fs.copyFile() 复制文件
 */
 
-const fs = require("fs/promises");
-const path = require("path");
+// 引用中 加 node: 是为了 直接去找node 核心模块，更快一点
+const fs = require("node:fs/promises");
+const path = require("node:path");
 
 const { delayPromise } = require("../utils/util");
 

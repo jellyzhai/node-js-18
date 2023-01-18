@@ -1,10 +1,10 @@
 /*
     fs.readFile()
     fs.appendFIle() 创建新文件，或将数据添加到已有文件中
-    fs.mkdir() 创建目录
-    fs.rmdir() 删除目录
+    fs.mkdir() 创建目录 （第二个参数 { recursive: true } 可以递归创建多层文件夹）
+    fs.rmdir() 删除目录 （第二个参数 { recursive: true } 可以递归删除）
     fs.rm() 删除文件
-    fs.rename() 重命名
+    fs.rename() 重命名 （相当于 剪切）
     fs.copyFile() 复制文件
 */
 

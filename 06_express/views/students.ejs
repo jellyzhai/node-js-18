@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        table {
+            border-collapse: collapse;
+            text-align: center;
+            font-size: 20px;
+        }
+        caption {
+            font-weight: bold;
+        }
+        th, tr, td {
+            border: 1px solid #000;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>这是 需要在服务器中 做一次渲染再返回到前端的页面</h1>
+
+    <h2>ejs 变量</h2>
+    <%=name %>
+    <%=age %>
+    <%=gender %>
+
+    <%-info %>
+
+    <!-- <h2>ejs 注释</h2> -->
+    <%#address  %>
+
+    <hr>
+
+    <table>
+        <caption>学生</caption>
+
+        <thead>
+            <th>学号</th>
+            <th>姓名</th>
+            <th>性别</th>
+            <th>年龄</th>
+            <th>地址</th>
+            <th>操作</th>
+        </thead>
+
+        <tbody>
+            <% for(let [key, user] of students.entries()) {%>
+                <tr>
+                    <td><%=user.id%></td>
+                    <td><%=user.name%></td>
+                    <td><%=user.gender%></td>
+                    <td><%=user.age%></td>
+                    <td><%=user.address%></td>
+                    <td>
+                        <!-- confirm 返回true 继续点击动作，返回false，取消默认行为 -->
+                        <a onclick="return confirm('确定要删除吗？')" href="/delete_student?id=<%=user.id%>">删除</a>
+                        <a href="/edit_student?id=<%=user.id%>">修改</a>
+                    </td>
+                </tr>
+            <%}%>
+
+            <% if (!students.length) {%>
+                <tr>
+                    <td colspan="6">暂无数据</td>
+                </tr>
+            <%} %>
+        </tbody>
+    </table>
+
+    <hr>
+
+    <form action="/add_student" method="post">
+        <div>姓名：<input type="text" name="name" ></div>
+        <div>
+            性别:
+            <input type="radio" name="gender" value="男" checked>男
+            <input type="radio" name="gender" value="女">女
+        </div>
+        <div>年龄:<input type="number" name="age" ></div>
+        <div>地址:<input type="text" name="address" ></div>
+        <button type="submit">添加</button>
+    </form>
+</body>
+
+</html>

@@ -4,7 +4,9 @@ async function readDataTable(filePath, defaultVal, cb) {
   return await fs
     .readFile(filePath)
     .then((data) => {
-      console.log("data.toString：", JSON.parse(data.toString()));
+      if (!data.toString()) {
+        return defaultVal;
+      }
       return JSON.parse(data.toString());
     })
     .catch((err) => {
@@ -17,8 +19,8 @@ async function readDataTable(filePath, defaultVal, cb) {
 }
 
 async function writeDataTable(filePath, writableData) {
-  await fs.rm(filePath);
-  return await fs.appendFile(filePath, writableData);
+  // await fs.rm(filePath);
+  return await fs.writeFile(filePath, writableData);
 }
 
 module.exports = {

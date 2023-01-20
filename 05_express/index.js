@@ -8,8 +8,8 @@ const usersDataPath = path.resolve(__dirname, "./database/users.json");
 
 // 注册的用户数据
 let USERS = [];
-readDataTable(usersDataPath, { USERS: [] }).then(data => {
-    USERS = data.USERS;
+readDataTable(usersDataPath, []).then(data => {
+    USERS = data;
 });
 
 // 设置静态资源目录
@@ -51,7 +51,7 @@ app.post("/registry", (req, res) => {
     res.send("用户名或昵称已存在！");
   } else {
     USERS.push({ username, password, repwd, nickname });
-    const writableData = JSON.stringify({ USERS });
+    const writableData = JSON.stringify(USERS);
 
     writeDataTable(usersDataPath, writableData).then(() => {
         res.send(`${username}（${nickname}） 注册成功`);

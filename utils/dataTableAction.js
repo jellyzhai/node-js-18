@@ -7,7 +7,12 @@ async function readDataTable(filePath, defaultVal, cb) {
       if (!data.toString()) {
         return defaultVal;
       }
-      return JSON.parse(data.toString());
+
+      try {
+        return JSON.parse(data.toString());
+      } catch (error) {
+        return defaultVal;
+      }
     })
     .catch((err) => {
       console.log(err);
@@ -19,7 +24,6 @@ async function readDataTable(filePath, defaultVal, cb) {
 }
 
 async function writeDataTable(filePath, writableData) {
-  // await fs.rm(filePath);
   return await fs.writeFile(filePath, writableData);
 }
 
